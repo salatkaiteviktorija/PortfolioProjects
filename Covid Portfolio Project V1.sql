@@ -62,12 +62,15 @@ ORDER BY TotalDeathCount DESC
 
 
 --Global numbers
+-- European Union is part of Europe
 
-SELECT SUM(new_cases) as total_cases,SUM(cast(new_deaths as int)) as total_deaths,SUM(cast(new_deaths as int))/SUM(new_cases)*100 as DeathPercentage
+
+SELECT continent, SUM(cast(new_deaths as int)) as TotalDeathCount
 FROM PortfolioProject.dbo.CovidDeaths
 WHERE continent is not null
---GROUP BY date
-ORDER BY 1,2;
+AND location not in ('World','European Union','International')
+GROUP BY continent
+ORDER BY TotalDeathCount DESC
 
 
 -- Looking at total Population vs Vaccinations
